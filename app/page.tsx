@@ -5,9 +5,11 @@ import Header from '@/components/layout/Header'
 import SummaryCards from '@/components/dashboard/SummaryCards'
 import SpendingChart from '@/components/dashboard/SpendingChart'
 import RecentExpenses from '@/components/dashboard/RecentExpenses'
+import Button from '@/components/ui/Button'
+import { exportToCSV } from '@/utils/exportCSV'
 
 export default function DashboardPage() {
-  const { stats, recentExpenses, hydrated } = useExpenses()
+  const { expenses, stats, recentExpenses, hydrated } = useExpenses()
 
   if (!hydrated) {
     return (
@@ -27,6 +29,11 @@ export default function DashboardPage() {
       <Header
         title="Dashboard"
         subtitle="Overview of your spending"
+        actions={
+          <Button variant="secondary" size="sm" onClick={() => exportToCSV(expenses)}>
+            Export Data
+          </Button>
+        }
       />
       <SummaryCards
         total={stats.total}
