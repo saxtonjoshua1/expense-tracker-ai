@@ -1,3 +1,12 @@
+This is the course for Claude Code from Vanderbilt on Coursera
+
+Claude Code: Software Engineering with Generative AI Agents
+by Vanderbilt University
+
+Taught by:
+Dr. Jules White, Professor of Computer Science
+Computer Science
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
