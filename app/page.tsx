@@ -1,13 +1,17 @@
 'use client'
 
+import { useState } from 'react'
+import { Cloud } from 'lucide-react'
 import { useExpenses } from '@/hooks/useExpenses'
 import Header from '@/components/layout/Header'
 import SummaryCards from '@/components/dashboard/SummaryCards'
 import SpendingChart from '@/components/dashboard/SpendingChart'
 import RecentExpenses from '@/components/dashboard/RecentExpenses'
+import CloudExportModal from '@/components/export/CloudExportModal'
 
 export default function DashboardPage() {
-  const { stats, recentExpenses, hydrated } = useExpenses()
+  const { stats, recentExpenses, expenses, hydrated } = useExpenses()
+  const [showCloudExport, setShowCloudExport] = useState(false)
 
   if (!hydrated) {
     return (
@@ -27,6 +31,15 @@ export default function DashboardPage() {
       <Header
         title="Dashboard"
         subtitle="Overview of your spending"
+        actions={
+          <button
+            onClick={() => setShowCloudExport(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold shadow-md shadow-indigo-200 hover:opacity-90 transition-opacity"
+          >
+            <Cloud size={15} />
+            Cloud Export
+          </button>
+        }
       />
       <SummaryCards
         total={stats.total}
@@ -36,6 +49,12 @@ export default function DashboardPage() {
       />
       <SpendingChart byCategory={stats.byCategory} />
       <RecentExpenses expenses={recentExpenses} />
+
+      <CloudExportModal
+        isOpen={showCloudExport}
+        onClose={() => setShowCloudExport(false)}
+        expenses={expenses}
+      />
     </div>
   )
 }
