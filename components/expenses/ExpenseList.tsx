@@ -8,7 +8,7 @@ import Modal from '@/components/ui/Modal'
 import FilterBar from './FilterBar'
 import ExpenseForm from './ExpenseForm'
 import ExpenseItem from './ExpenseItem'
-import { exportToCSV } from '@/utils/exportCSV'
+import ExportModal from '@/components/export/ExportModal'
 import { formatCurrency } from '@/utils/formatters'
 
 interface ExpenseListProps {
@@ -31,6 +31,7 @@ export default function ExpenseList({
   onDelete,
 }: ExpenseListProps) {
   const [addOpen, setAddOpen] = useState(false)
+  const [exportOpen, setExportOpen] = useState(false)
 
   function handleAdd(data: ExpenseFormData) {
     onAdd(data)
@@ -46,10 +47,10 @@ export default function ExpenseList({
         <Button
           variant="secondary"
           size="sm"
-          onClick={() => exportToCSV(filteredExpenses)}
-          disabled={filteredExpenses.length === 0}
+          onClick={() => setExportOpen(true)}
+          disabled={expenses.length === 0}
         >
-          <Download size={14} /> Export CSV
+          <Download size={14} /> Export
         </Button>
         <div className="ml-auto">
           <Button onClick={() => setAddOpen(true)}>
@@ -128,6 +129,13 @@ export default function ExpenseList({
       <Modal isOpen={addOpen} onClose={() => setAddOpen(false)} title="Add Expense">
         <ExpenseForm onSubmit={handleAdd} onCancel={() => setAddOpen(false)} />
       </Modal>
+
+      {/* Export Modal (v2) */}
+      <ExportModal
+        isOpen={exportOpen}
+        onClose={() => setExportOpen(false)}
+        expenses={expenses}
+      />
     </>
   )
 }
