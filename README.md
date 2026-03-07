@@ -1,4 +1,6 @@
-This is the course for Claude Code from Vanderbilt on Coursera
+This is the course for Claude Code from Vanderbilt on Coursera: 
+
+coursera.org/learn/claude-code/home/welcome
 
 Claude Code: Software Engineering with Generative AI Agents
 by Vanderbilt University
